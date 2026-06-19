@@ -45,7 +45,7 @@ jobs:
 
     - name: Update Deployment Manifest
       run: |
-        sed -i "s|image: .*|image: ghcr.io/$OWNER_LC/admin-dashboard:${{ github.run_number }}|g" manifest/deploy.yaml
+        sed -i "s|image: .*|image: ghcr.io/$OWNER_LC/admin-dashboard:${{ github.run_number }}|g" manifest/Deploy.yaml
 
     - name: Commit Updated Manifest
       run: |
@@ -64,7 +64,7 @@ jobs:
 
     - name: Deploy Updated Manifest
       run: |
-        kubectl apply -f manifest/deploy.yaml
+        kubectl apply -f manifest/Deploy.yaml
         kubectl apply -f manifest/svc.yaml
         kubectl apply -f manifest/ing.yaml
 
