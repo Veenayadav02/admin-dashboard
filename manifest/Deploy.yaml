@@ -4,11 +4,9 @@ metadata:
   name: frontend
 spec:
   replicas: 3
-
   selector:
     matchLabels:
       app: frontend
-
   template:
     metadata:
       labels:
@@ -16,6 +14,6 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: ghcr.io/veenayadav02/health-website:7
+        image: ghcr.io/veenayadav02/admin-dashboard:1
         ports:
         - containerPort: 80
