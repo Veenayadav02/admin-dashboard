@@ -31,17 +31,21 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
 
+    - name: Set lowercase owner
+      run: |
+        echo "OWNER_LC=${GITHUB_REPOSITORY_OWNER,,}" >> $GITHUB_ENV
+
     - name: Build Image
       run: |
-        docker build -t ghcr.io/${{ github.repository_owner }}/admin-dashboard:${{ github.run_number }} .
+        docker build -t ghcr.io/$OWNER_LC/admin-dashboard:${{ github.run_number }} .
 
     - name: Push Image
       run: |
-        docker push ghcr.io/${{ github.repository_owner }}/admin-dashboard:${{ github.run_number }}
+        docker push ghcr.io/$OWNER_LC/admin-dashboard:${{ github.run_number }}
 
     - name: Update Deployment Manifest
       run: |
-        sed -i "s|image: .*|image: ghcr.io/${{ github.repository_owner }}/admin-dashboard:${{ github.run_number }}|g" k8s/deployment.yaml
+        sed -i "s|image: .*|image: ghcr.io/$OWNER_LC/admin-dashboard:${{ github.run_number }}|g" k8s/deployment.yaml
 
     - name: Commit Updated Manifest
       run: |
