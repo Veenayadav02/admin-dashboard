@@ -45,7 +45,7 @@ jobs:
 
     - name: Update Deployment Manifest
       run: |
-        sed -i "s|image: .*|image: ghcr.io/$OWNER_LC/admin-dashboard:${{ github.run_number }}|g" k8s/deployment.yaml
+        sed -i "s|image: .*|image: ghcr.io/$OWNER_LC/admin-dashboard:${{ github.run_number }}|g" manifest/deploy.yaml
 
     - name: Commit Updated Manifest
       run: |
